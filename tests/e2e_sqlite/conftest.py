@@ -57,11 +57,10 @@ from app.routes.api import (
     memories,
     plans,
     projects,
+    skills,
     tasks,
 )
-from app.routes.api import skills as skills_api
 from app.routes.mcp import meta_tools
-from app.routes.mcp import skill_tools as skills
 from app.routes.mcp.scope_resolver import parse_scopes, resolve_permitted_tools
 from app.routes.mcp.tool_metadata_registry import register_all_tools_metadata
 from app.routes.mcp.tool_registry import ToolRegistry
@@ -323,7 +322,6 @@ async def build_sqlite_app(embedding_adapter, reranker_adapter, enabled_features
             tasks.register(mcp)
         if "skills" in enabled_features:
             skills.register(mcp)
-            skills_api.register(mcp)
 
         meta_tools.register(mcp)
 

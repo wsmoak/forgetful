@@ -47,17 +47,16 @@ from app.routes.api import (
     code_artifacts,
     documents,
     entities,
+    files,
     graph,
     health,
     memories,
+    plans,
     projects,
+    skills,
+    tasks,
 )
-from app.routes.api import files as files_routes
-from app.routes.api import plans as plans_routes
-from app.routes.api import skills as skills_api
-from app.routes.api import tasks as tasks_routes
 from app.routes.mcp import meta_tools
-from app.routes.mcp import skill_tools as skill_routes
 from app.routes.mcp.tool_metadata_registry import register_all_tools_metadata
 from app.routes.mcp.tool_registry import ToolRegistry
 from app.services.activity_service import ActivityService
@@ -485,12 +484,11 @@ async def postgres_app(db_adapter, embedding_adapter, reranker_adapter, request)
     code_artifacts.register(mcp)
     graph.register(mcp)
     activity.register(mcp)
-    plans_routes.register(mcp)
-    tasks_routes.register(mcp)
+    plans.register(mcp)
+    tasks.register(mcp)
     if settings.FILES_ENABLED:
-        files_routes.register(mcp)
-    skill_routes.register(mcp)
-    skills_api.register(mcp)
+        files.register(mcp)
+    skills.register(mcp)
     meta_tools.register(mcp)
 
     yield mcp
